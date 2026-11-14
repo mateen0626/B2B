@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UrbanThreads – Premium Clothing Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --gold: #f0a500;
+      --light: #f5f5f5;
+      --white: #ffffff;
+      --card-bg: #ffffff;
+      --shadow: 0 8px 32px rgba(0,0,0,0.12);
+      --radius: 16px;
+    }
+
+    /* ─── TOP CONTACT BAR ─── */
+    .top-bar {
+      background: #111;
+      padding: 9px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 8px;
+    }
+    .top-bar-left { color: #aaa; font-size: 0.8rem; }
+    .top-bar-right {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .contact-pill {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--accent);
+      color: white; font-size: 0.82rem; font-weight: 600;
+      padding: 5px 16px; border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .contact-pill:hover { background: #c0392b; transform: scale(1.04); }
+    .contact-pill i { font-size: 0.85rem; }
+
+    /* ─── FLOATING CALL BUTTON ─── */
+    .float-call {
+      position: fixed; bottom: 30px; left: 30px;
+      z-index: 9998;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .float-call a {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: white; text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pulse 2s infinite;
+    }
+    .float-call .call-btn { background: #25D366; }
+    .float-call .call-btn:hover { transform: scale(1.15); box-shadow: 0 10px 30px rgba(37,211,102,0.5); }
+    .float-call .phone-btn { background: var(--accent); }
+    .float-call .phone-btn:hover { transform: scale(1.15); box-shadow: 0 10px 30px rgba(233,69,96,0.5); }
+    .float-label {
+      background: var(--primary); color: white;
+      font-size: 0.7rem; font-weight: 600;
+      padding: 3px 10px; border-radius: 50px;
+      white-space: nowrap; letter-spacing: 0.5px;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+      50% { box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0f0f5;
+      color: #222;
+      scroll-behavior: smooth;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: var(--primary);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 70px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.7rem; font-weight: 900;
+      color: var(--white);
+      letter-spacing: 2px;
+    }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: #ccc; text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-icons { display: flex; gap: 20px; color: var(--white); font-size: 1.1rem; cursor: pointer; }
+    .nav-icons i:hover { color: var(--accent); transition: 0.3s; }
+    .cart-badge {
+      position: relative;
+    }
+    .cart-badge::after {
+      content: '0';
+      position: absolute; top: -8px; right: -8px;
+      background: var(--accent); color: white;
+      font-size: 0.6rem; width: 16px; height: 16px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 90vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 60px 20px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80') center/cover no-repeat;
+      opacity: 0.15;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent); color: white;
+      padding: 6px 20px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 900; color: white;
+      line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      color: #aaa; font-size: 1.1rem;
+      max-width: 600px; margin: 0 auto 36px;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: white;
+      padding: 14px 36px; border-radius: 50px;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(233,69,96,0.4); }
+    .btn-outline {
+      background: transparent; color: white;
+      padding: 14px 36px; border-radius: 50px;
+      font-weight: 600; font-size: 1rem;
+      text-decoration: none; border: 2px solid rgba(255,255,255,0.4); cursor: pointer;
+      transition: all 0.3s; display: inline-block;
+    }
+    .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap {
+      background: var(--accent); padding: 12px 0; overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 60px; white-space: nowrap;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-track span {
+      color: white; font-weight: 600; font-size: 0.9rem;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header {
+      text-align: center; padding: 60px 20px 30px;
+    }
+    .section-header .tag {
+      color: var(--accent); font-weight: 600; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 3px;
+    }
+    .section-header h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800; margin: 8px 0 12px; color: var(--primary);
+    }
+    .section-header p { color: #666; max-width: 550px; margin: 0 auto; }
+
+    /* ─── CATEGORY PILLS ─── */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; padding: 20px 20px 10px;
+    }
+    .filter-btn {
+      padding: 9px 22px; border-radius: 50px;
+      border: 2px solid #ddd; background: white;
+      font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      transition: all 0.3s; color: #555;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary); color: white; border-color: var(--primary);
+    }
+
+    /* ─── PRODUCT GRID ─── */
+    .products-section { padding: 20px 40px 60px; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 28px; max-width: 1400px; margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.18); }
+
+    .product-image {
+      position: relative; overflow: hidden; height: 280px;
+    }
+    .product-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .product-card:hover .product-image img { transform: scale(1.08); }
+
+    .badge {
+      position: absolute; top: 14px; left: 14px;
+      padding: 4px 12px; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    }
+    .badge-new { background: #22c55e; color: white; }
+    .badge-sale { background: var(--accent); color: white; }
+    .badge-hot { background: var(--gold); color: white; }
+    .badge-trending { background: #8b5cf6; color: white; }
+
+    .wishlist-btn {
+      position: absolute; top: 14px; right: 14px;
+      width: 36px; height: 36px;
+      background: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: all 0.3s; border: none;
+      font-size: 0.9rem; color: #aaa;
+    }
+    .wishlist-btn:hover { background: var(--accent); color: white; }
+    .wishlist-btn.active { background: var(--accent); color: white; }
+
+    .quick-add {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: var(--primary); color: white;
+      text-align: center; padding: 12px;
+      font-size: 0.85rem; font-weight: 600;
+      transform: translateY(100%);
+      transition: transform 0.3s; cursor: pointer;
+      border: none; width: 100%;
+      letter-spacing: 1px;
+    }
+    .product-card:hover .quick-add { transform: translateY(0); }
+
+    .product-info { padding: 18px; }
+    .product-category {
+      color: var(--accent); font-size: 0.75rem;
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .product-name {
+      font-weight: 600; font-size: 1rem;
+      color: var(--primary); margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .product-colors {
+      display: flex; gap: 6px; margin-bottom: 12px;
+    }
+    .color-dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid #eee; cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .color-dot:hover { transform: scale(1.3); }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .price { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+    .price .original { color: #aaa; font-size: 0.85rem; text-decoration: line-through; margin-left: 6px; font-weight: 400; }
+    .stars { color: var(--gold); font-size: 0.75rem; }
+    .rating-count { color: #aaa; font-size: 0.75rem; margin-left: 4px; }
+
+    /* ─── CATEGORY SHOWCASE ─── */
+    .categories-section {
+      padding: 20px 40px 60px;
+      max-width: 1400px; margin: 0 auto;
+    }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .cat-card {
+      border-radius: var(--radius); overflow: hidden;
+      position: relative; height: 200px; cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+    .cat-card:hover { transform: translateY(-6px); }
+    .cat-card img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s;
+    }
+    .cat-card:hover img { transform: scale(1.1); }
+    .cat-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+      display: flex; align-items: flex-end; padding: 16px;
+    }
+    .cat-name {
+      color: white; font-weight: 700;
+      font-size: 1rem; font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ─── FEATURES STRIP ─── */
+    .features {
+      background: var(--primary); padding: 50px 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px; text-align: center;
+    }
+    .feature-item i {
+      font-size: 2rem; color: var(--accent); margin-bottom: 14px;
+    }
+    .feature-item h4 { color: white; font-weight: 600; margin-bottom: 6px; }
+    .feature-item p { color: #aaa; font-size: 0.85rem; }
+
+    /* ─── PROMO BANNER ─── */
+    .promo-banner {
+      background: linear-gradient(135deg, var(--accent), #c0392b);
+      padding: 60px 40px; text-align: center;
+      margin: 40px;  border-radius: 24px;
+    }
+    .promo-banner h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: white; font-weight: 900; margin-bottom: 10px;
+    }
+    .promo-banner p { color: rgba(255,255,255,0.85); margin-bottom: 24px; font-size: 1rem; }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter {
+      background: #1a1a2e; padding: 60px 20px; text-align: center;
+    }
+    .newsletter h2 { color: white; font-family: 'Montserrat', sans-serif; font-size: 2rem; margin-bottom: 10px; }
+    .newsletter p { color: #aaa; margin-bottom: 28px; }
+    .newsletter form {
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+    .newsletter input {
+      padding: 14px 24px; border-radius: 50px; border: none;
+      outline: none; font-size: 0.95rem; width: 300px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #111; color: #aaa; padding: 50px 40px 24px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px; margin-bottom: 40px;
+    }
+    .footer-col h4 {
+      color: white; font-weight: 700; margin-bottom: 18px; font-size: 1rem;
+    }
+    .footer-col a {
+      display: block; color: #aaa; text-decoration: none;
+      margin-bottom: 10px; font-size: 0.88rem; transition: color 0.3s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .social-links { display: flex; gap: 14px; margin-top: 16px; }
+    .social-links a {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #222; display: flex; align-items: center;
+      justify-content: center; color: #aaa; font-size: 0.95rem;
+      transition: all 0.3s; text-decoration: none;
+    }
+    .social-links a:hover { background: var(--accent); color: white; }
+    .footer-bottom {
+      border-top: 1px solid #222; padding-top: 20px;
+      text-align: center; font-size: 0.82rem;
+    }
+
+    /* ─── MODAL / TOAST ─── */
+    .toast {
+      position: fixed; bottom: 30px; right: 30px;
+      background: var(--primary); color: white;
+      padding: 14px 24px; border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      font-size: 0.9rem; font-weight: 500;
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.4s; z-index: 9999;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast i { color: var(--accent); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .products-section, .categories-section { padding: 16px 16px 40px; }
+      .promo-banner { margin: 20px; }
+      .features { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── TOP CONTACT BAR ─── -->
+<div class="top-bar">
+  <div class="top-bar-left">📦 Free Shipping on orders over $50 &nbsp;|&nbsp; Easy 30-Day Returns</div>
+  <div class="top-bar-right">
+    <span style="color:#aaa;font-size:0.8rem;">📞 Need Help?</span>
+    <a href="tel:03267690327" class="contact-pill">
+      <i class="fa fa-phone"></i> 0326-7690327
+    </a>
+  </div>
+</div>
+
+<!-- ─── NAVBAR ─── -->
+<nav>
+  <div class="logo">Urban<span>Threads</span></div>
+  <ul class="nav-links">
+    <li><a href="#tshirts">T-Shirts</a></li>
+    <li><a href="#sweatshirts">Sweatshirts</a></li>
+    <li><a href="#jackets">Jackets</a></li>
+    <li><a href="#trousers">Trousers</a></li>
+    <li><a href="#shirts">Shirts</a></li>
+  </ul>
+  <div class="nav-icons">
+    <i class="fa fa-search"></i>
+    <i class="fa fa-user"></i>
+    <i class="fa fa-shopping-bag cart-badge"></i>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🔥 New Collection 2026</div>
+    <h1>Dress to <span>Impress</span><br/>Every Single Day</h1>
+    <p>T-Shirts · Sweatshirts · Leather Jackets · All Trousers · Shirts – everything you need, nothing you don't.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary">Shop Now</a>
+      <a href="#categories" class="btn-outline">Explore Categories</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>🛍 Free Shipping Over $50</span>
+    <span>⭐ New Arrivals Every Week</span>
+    <span>🎁 Buy 2 Get 1 Free on T-Shirts</span>
+    <span>🌟 Premium Quality Guaranteed</span>
+    <span>🔥 Up to 40% Off on Leather Jackets</span>
+    <span>🌍 Worldwide Shipping</span>
+    <span>🛍 Free Shipping Over $50</span>
+    <span>⭐ New Arrivals Every Week</span>
+    <span>🎁 Buy 2 Get 1 Free on T-Shirts</span>
+    <span>🌟 Premium Quality Guaranteed</span>
+    <span>🔥 Up to 40% Off on Leather Jackets</span>
+    <span>🌍 Worldwide Shipping</span>
+  </div>
+</div>
+
+<!-- ─── CATEGORY GRID ─── -->
+<div id="categories">
+  <div class="section-header">
+    <div class="tag">Browse by Category</div>
+    <h2>What Are You Looking For?</h2>
+    <p>From casual tees to sharp shirts — we've got every style covered.</p>
+  </div>
+  <div class="categories-section">
+    <div class="categories-grid">
+      <div class="cat-card" onclick="filterProducts('half-sleeve')">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80" alt="Half Sleeve T-Shirts"/>
+        <div class="cat-overlay"><div class="cat-name">👕 Half Sleeve Tees</div></div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('full-sleeve')">
+        <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&q=80" alt="Full Sleeve T-Shirts"/>
+        <div class="cat-overlay"><div class="cat-name">👕 Full Sleeve Tees</div></div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('sweatshirt')">
+        <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&q=80" alt="Sweatshirts"/>
+        <div class="cat-overlay"><div class="cat-name">🧥 Sweatshirts</div></div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('jacket')">
+        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&q=80" alt="Leather Jackets"/>
+        <div class="cat-overlay"><div class="cat-name">🧥 Leather Jackets</div></div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('trouser')">
+        <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&q=80" alt="Trousers"/>
+        <div class="cat-overlay"><div class="cat-name">👖 All Trousers</div></div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('shirt')">
+        <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&q=80" alt="Shirts"/>
+        <div class="cat-overlay"><div class="cat-name">👔 Shirts</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PRODUCTS ─── -->
+<div id="products">
+  <div class="section-header">
+    <div class="tag">Our Collection</div>
+    <h2>All Products</h2>
+    <p>High-quality pieces curated for every mood, season and style.</p>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('half-sleeve', this)">Half Sleeve T-Shirts</button>
+    <button class="filter-btn" onclick="filterProducts('full-sleeve', this)">Full Sleeve T-Shirts</button>
+    <button class="filter-btn" onclick="filterProducts('sweatshirt', this)">Sweatshirts</button>
+    <button class="filter-btn" onclick="filterProducts('jacket', this)">Leather Jackets</button>
+    <button class="filter-btn" onclick="filterProducts('trouser', this)">Trousers</button>
+    <button class="filter-btn" onclick="filterProducts('shirt', this)">Shirts</button>
+  </div>
+
+  <section id="tshirts" class="products-section">
+    <div class="products-grid" id="productsGrid">
+
+      <!-- HALF SLEEVE T-SHIRTS -->
+      <div class="product-card" data-category="half-sleeve">
+        <div class="product-image">
+          <span class="badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80" alt="Classic White Tee"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Classic White Half Sleeve')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Half Sleeve T-Shirt</div>
+          <div class="product-name">Classic White Crew Tee</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#fff;border:2px solid #ddd"></div>
+            <div class="color-dot" style="background:#1a1a2e"></div>
+            <div class="color-dot" style="background:#e94560"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$18.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(312)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="half-sleeve">
+        <div class="product-image">
+          <span class="badge badge-sale">-30%</span>
+          <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=500&q=80" alt="Graphic Tee"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Graphic Oversized Tee')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Half Sleeve T-Shirt</div>
+          <div class="product-name">Graphic Oversized Drop Tee</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#6b7280"></div>
+            <div class="color-dot" style="background:#d97706"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$21.99 <span class="original">$29.99</span></div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(187)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="half-sleeve">
+        <div class="product-image">
+          <span class="badge badge-hot">Hot</span>
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80" alt="V-Neck Tee"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('V-Neck Summer Tee')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Half Sleeve T-Shirt</div>
+          <div class="product-name">V-Neck Summer Essential</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#fff;border:2px solid #ddd"></div>
+            <div class="color-dot" style="background:#3b82f6"></div>
+            <div class="color-dot" style="background:#10b981"></div>
+            <div class="color-dot" style="background:#f59e0b"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$16.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(445)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FULL SLEEVE T-SHIRTS -->
+      <div class="product-card" data-category="full-sleeve">
+        <div class="product-image">
+          <span class="badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=500&q=80" alt="Full Sleeve Tee"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Full Sleeve Thermal Tee')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Full Sleeve T-Shirt</div>
+          <div class="product-name">Full Sleeve Thermal Fit Tee</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#1f2937"></div>
+            <div class="color-dot" style="background:#7c3aed"></div>
+            <div class="color-dot" style="background:#065f46"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$24.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(228)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="full-sleeve">
+        <div class="product-image">
+          <span class="badge badge-trending">Trending</span>
+          <img src="https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=500&q=80" alt="Striped Full Sleeve"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Striped Full Sleeve Tee')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Full Sleeve T-Shirt</div>
+          <div class="product-name">Striped Casual Long Sleeve</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#fff;border:2px solid #ddd"></div>
+            <div class="color-dot" style="background:#1e3a5f"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$22.99</div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(154)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="full-sleeve">
+        <div class="product-image">
+          <span class="badge badge-sale">-25%</span>
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80" alt="Athletic Sleeve"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Athletic Long Sleeve Tee')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Full Sleeve T-Shirt</div>
+          <div class="product-name">Athletic Performance Long Sleeve</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#e94560"></div>
+            <div class="color-dot" style="background:#0ea5e9"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$19.99 <span class="original">$26.99</span></div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(299)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SWEATSHIRTS -->
+      <div class="product-card" data-category="sweatshirt" id="sweatshirts">
+        <div class="product-image">
+          <span class="badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=500&q=80" alt="Hoodie"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Oversized Hoodie Sweatshirt')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Sweatshirt / Hoodie</div>
+          <div class="product-name">Oversized Fleece Hoodie</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#374151"></div>
+            <div class="color-dot" style="background:#7c3aed"></div>
+            <div class="color-dot" style="background:#be123c"></div>
+            <div class="color-dot" style="background:#065f46"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$44.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(512)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="sweatshirt">
+        <div class="product-image">
+          <span class="badge badge-hot">Hot</span>
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=500&q=80" alt="Crewneck Sweatshirt"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Crewneck Sweatshirt')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Sweatshirt</div>
+          <div class="product-name">Classic Crewneck Sweatshirt</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#f5f5dc;border:1px solid #ddd"></div>
+            <div class="color-dot" style="background:#1f2937"></div>
+            <div class="color-dot" style="background:#7f1d1d"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$38.99</div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(341)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="sweatshirt">
+        <div class="product-image">
+          <span class="badge badge-trending">Trending</span>
+          <img src="https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=500&q=80" alt="Zip Hoodie"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Zip-Up Tech Hoodie')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Sweatshirt / Zip Hoodie</div>
+          <div class="product-name">Tech Zip-Up Hoodie</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#374151"></div>
+            <div class="color-dot" style="background:#1e40af"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$52.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(267)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEATHER JACKETS -->
+      <div class="product-card" data-category="jacket" id="jackets">
+        <div class="product-image">
+          <span class="badge badge-hot">Hot</span>
+          <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80" alt="Classic Leather Jacket"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Classic Black Leather Jacket')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Leather Jacket</div>
+          <div class="product-name">Classic Black Biker Jacket</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#3b2314"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$149.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(198)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jacket">
+        <div class="product-image">
+          <span class="badge badge-sale">-20%</span>
+          <img src="https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=500&q=80" alt="Brown Leather Jacket"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Brown Vintage Leather Jacket')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Leather Jacket</div>
+          <div class="product-name">Vintage Brown Moto Jacket</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#6b3a2a"></div>
+            <div class="color-dot" style="background:#111"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$119.99 <span class="original">$149.99</span></div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(134)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="jacket">
+        <div class="product-image">
+          <span class="badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Racer Jacket"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Racer Leather Jacket')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Leather Jacket</div>
+          <div class="product-name">Slim Fit Racer Leather Jacket</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#1e3a5f"></div>
+            <div class="color-dot" style="background:#3d1a1a"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$179.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(89)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TROUSERS -->
+      <div class="product-card" data-category="trouser" id="trousers">
+        <div class="product-image">
+          <span class="badge badge-hot">Hot</span>
+          <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500&q=80" alt="Baggy Trousers"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Cargo Baggy Trousers')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Baggy Trousers</div>
+          <div class="product-name">Wide-Leg Cargo Baggy Trousers</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#374151"></div>
+            <div class="color-dot" style="background:#065f46"></div>
+            <div class="color-dot" style="background:#78350f"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$49.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(334)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="trouser">
+        <div class="product-image">
+          <span class="badge badge-trending">Trending</span>
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4d05?w=500&q=80" alt="Korean Trousers"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Korean Style Trousers')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Korean Trousers</div>
+          <div class="product-name">Korean Street Style Wide Trousers</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#f5f5f5;border:1px solid #ddd"></div>
+            <div class="color-dot" style="background:#1f2937"></div>
+            <div class="color-dot" style="background:#7c3aed"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$54.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(421)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="trouser">
+        <div class="product-image">
+          <span class="badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&q=80" alt="Slim Trousers"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Slim Chino Trousers')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Slim Trousers</div>
+          <div class="product-name">Slim Fit Chino Trousers</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#d6cfc7"></div>
+            <div class="color-dot" style="background:#374151"></div>
+            <div class="color-dot" style="background:#1e3a5f"></div>
+            <div class="color-dot" style="background:#111"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$42.99</div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(256)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="trouser">
+        <div class="product-image">
+          <span class="badge badge-sale">-15%</span>
+          <img src="https://images.unsplash.com/photo-1560243563-062bfc001d68?w=500&q=80" alt="Jogger Trousers"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Jogger Trousers')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Jogger Trousers</div>
+          <div class="product-name">Tapered Jogger Track Trousers</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#374151"></div>
+            <div class="color-dot" style="background:#7f1d1d"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$37.99 <span class="original">$44.99</span></div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(389)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="trouser">
+        <div class="product-image">
+          <span class="badge badge-hot">Hot</span>
+          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&q=80" alt="Linen Trousers"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Linen Wide Trousers')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Linen Trousers</div>
+          <div class="product-name">Summer Linen Wide-Leg Trousers</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#f5f5dc;border:1px solid #ddd"></div>
+            <div class="color-dot" style="background:#d6cfc7"></div>
+            <div class="color-dot" style="background:#065f46"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$46.99</div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(178)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="trouser">
+        <div class="product-image">
+          <span class="badge badge-trending">Trending</span>
+          <img src="https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?w=500&q=80" alt="Parachute Trousers"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Parachute Trousers')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Parachute Trousers</div>
+          <div class="product-name">Y2K Parachute Cargo Trousers</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#1e3a5f"></div>
+            <div class="color-dot" style="background:#374151"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$59.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(503)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="trouser">
+        <div class="product-image">
+          <span class="badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1544441893-675973e31985?w=500&q=80" alt="Pleated Trousers"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Pleated Dress Trousers')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Pleated Trousers</div>
+          <div class="product-name">Double-Pleated Formal Trousers</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#374151"></div>
+            <div class="color-dot" style="background:#1e40af"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$64.99</div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(112)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHIRTS -->
+      <div class="product-card" data-category="shirt" id="shirts">
+        <div class="product-image">
+          <span class="badge badge-new">New</span>
+          <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80" alt="Oxford Shirt"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Oxford Button-Up Shirt')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirt</div>
+          <div class="product-name">Classic Oxford Button-Up Shirt</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#fff;border:2px solid #ddd"></div>
+            <div class="color-dot" style="background:#1e3a5f"></div>
+            <div class="color-dot" style="background:#7f1d1d"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$39.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(287)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="shirt">
+        <div class="product-image">
+          <span class="badge badge-hot">Hot</span>
+          <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=80" alt="Flannel Shirt"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Flannel Plaid Shirt')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirt</div>
+          <div class="product-name">Flannel Plaid Casual Shirt</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#7f1d1d"></div>
+            <div class="color-dot" style="background:#1e3a5f"></div>
+            <div class="color-dot" style="background:#065f46"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$44.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(362)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="shirt">
+        <div class="product-image">
+          <span class="badge badge-sale">-20%</span>
+          <img src="https://images.unsplash.com/photo-1559575174-efd7b82b6d2e?w=500&q=80" alt="Cuban Collar Shirt"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Cuban Collar Shirt')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirt</div>
+          <div class="product-name">Cuban Collar Relaxed Shirt</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#f5f5dc;border:1px solid #ddd"></div>
+            <div class="color-dot" style="background:#111"></div>
+            <div class="color-dot" style="background:#0ea5e9"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$33.99 <span class="original">$42.99</span></div>
+            <div><span class="stars">★★★★☆</span><span class="rating-count">(195)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="shirt">
+        <div class="product-image">
+          <span class="badge badge-trending">Trending</span>
+          <img src="https://images.unsplash.com/photo-1620799139652-b3b0c64a2e5a?w=500&q=80" alt="Denim Shirt"/>
+          <button class="wishlist-btn" onclick="toggleWishlist(this)"><i class="fa fa-heart"></i></button>
+          <button class="quick-add" onclick="addToCart('Denim Overshirt')">+ Add to Cart</button>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirt</div>
+          <div class="product-name">Denim Overshirt / Shacket</div>
+          <div class="product-colors">
+            <div class="color-dot" style="background:#1e3a5f"></div>
+            <div class="color-dot" style="background:#374151"></div>
+          </div>
+          <div class="product-footer">
+            <div class="price">$57.99</div>
+            <div><span class="stars">★★★★★</span><span class="rating-count">(408)</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /products-grid -->
+  </section>
+</div><!-- /products -->
+
+<!-- ─── PROMO BANNER ─── -->
+<div class="promo-banner">
+  <h2>🔥 Flash Sale — Up to 40% Off!</h2>
+  <p>Limited time offer on selected leather jackets and sweatshirts. Don't miss out!</p>
+  <a href="#products" class="btn-primary" style="background:white;color:var(--accent);">Grab the Deal</a>
+</div>
+
+<!-- ─── FEATURES ─── -->
+<div class="features">
+  <div class="feature-item">
+    <i class="fa fa-truck"></i>
+    <h4>Free Shipping</h4>
+    <p>On all orders above $50 worldwide</p>
+  </div>
+  <div class="feature-item">
+    <i class="fa fa-rotate-left"></i>
+    <h4>Easy Returns</h4>
+    <p>30-day hassle-free return policy</p>
+  </div>
+  <div class="feature-item">
+    <i class="fa fa-shield-halved"></i>
+    <h4>Secure Payment</h4>
+    <p>100% secure checkout guaranteed</p>
+  </div>
+  <div class="feature-item">
+    <i class="fa fa-headset"></i>
+    <h4>24/7 Support</h4>
+    <p>We're here whenever you need us</p>
+  </div>
+</div>
+
+<!-- ─── NEWSLETTER ─── -->
+<div class="newsletter">
+  <h2>Get Exclusive Drops First 🔔</h2>
+  <p>Subscribe and be the first to know about new arrivals and special offers.</p>
+  <form onsubmit="subscribeNewsletter(event)">
+    <input type="email" placeholder="Enter your email address" required/>
+    <button type="submit" class="btn-primary">Subscribe</button>
+  </form>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="logo" style="font-size:1.3rem;margin-bottom:12px">Urban<span style="color:var(--accent)">Threads</span></div>
+      <p style="font-size:0.85rem;line-height:1.7">Premium clothing for every style – T-Shirts, Sweatshirts, Leather Jackets, All Trousers & Shirts.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-tiktok"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <a href="#">Half Sleeve T-Shirts</a>
+      <a href="#">Full Sleeve T-Shirts</a>
+      <a href="#">Sweatshirts & Hoodies</a>
+      <a href="#">Leather Jackets</a>
+      <a href="#">Trousers (All Types)</a>
+      <a href="#">Shirts</a>
+    </div>
+    <div class="footer-col">
+      <h4>Trouser Types</h4>
+      <a href="#">Baggy Trousers</a>
+      <a href="#">Korean Trousers</a>
+      <a href="#">Slim Fit Trousers</a>
+      <a href="#">Jogger Trousers</a>
+      <a href="#">Linen Trousers</a>
+      <a href="#">Parachute Trousers</a>
+      <a href="#">Pleated Trousers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Help & Contact</h4>
+      <div style="margin-bottom:14px;padding:14px;background:#1a1a1a;border-radius:12px;border-left:3px solid var(--accent);">
+        <div style="color:#aaa;font-size:0.78rem;margin-bottom:4px;">📞 Customer Support</div>
+        <a href="tel:03267690327" style="color:white;font-size:1rem;font-weight:700;letter-spacing:1px;">0326-7690327</a>
+        <div style="color:#666;font-size:0.74rem;margin-top:4px;">Mon–Sat · 9am – 9pm</div>
+      </div>
+      <a href="#">Size Guide</a>
+      <a href="#">Track Your Order</a>
+      <a href="#">Returns & Exchanges</a>
+      <a href="#">FAQs</a>
+      <a href="tel:03267690327">Contact Us</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 UrbanThreads. All rights reserved. | Crafted with ❤️ for style lovers.</p>
+  </div>
+</footer>
+
+<!-- ─── FLOATING CALL BUTTON ─── -->
+<div class="float-call">
+  <a href="tel:03267690327" class="phone-btn" title="Call Us"><i class="fa fa-phone"></i></a>
+  <a href="https://wa.me/923267690327" target="_blank" class="call-btn" title="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+  <div class="float-label">0326-7690327</div>
+</div>
+
+<!-- ─── TOAST ─── -->
+<div class="toast" id="toast">
+  <i class="fa fa-check-circle"></i>
+  <span id="toastMsg">Item added to cart!</span>
+</div>
+
+<!-- ─── JAVASCRIPT ─── -->
+<script>
+  // ── FILTER PRODUCTS ──
+  function filterProducts(category, btn) {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Update active button
+    if (btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // Scroll to products
+    document.getElementById('products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── ADD TO CART ──
+  let cartCount = 0;
+  function addToCart(itemName) {
+    cartCount++;
+    // Update badge
+    const badge = document.querySelector('.cart-badge');
+    badge.style.setProperty('--count', cartCount);
+
+    // Update toast
+    document.getElementById('toastMsg').textContent = `"${itemName}" added to cart!`;
+    showToast();
+  }
+
+  // ── TOGGLE WISHLIST ──
+  function toggleWishlist(btn) {
+    btn.classList.toggle('active');
+    const isWishlisted = btn.classList.contains('active');
+    document.getElementById('toastMsg').textContent = isWishlisted
+      ? '❤️ Added to wishlist!'
+      : '🤍 Removed from wishlist';
+    showToast();
+  }
+
+  // ── TOAST ──
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+
+  // ── NEWSLETTER ──
+  function subscribeNewsletter(e) {
+    e.preventDefault();
+    document.getElementById('toastMsg').textContent = '🎉 Subscribed! Welcome to the family.';
+    showToast();
+    e.target.reset();
+  }
+
+  // ── UPDATE CART BADGE DYNAMICALLY ──
+  const style = document.createElement('style');
+  document.head.appendChild(style);
+  const updateCartBadge = () => {
+    style.textContent = `.cart-badge::after { content: '${cartCount}'; }`;
+  };
+
+  const origAddToCart = window.addToCart;
+  window.addToCart = function(name) {
+    origAddToCart(name);
+    updateCartBadge();
+  };
+</script>
+
+</body>
+</html>
